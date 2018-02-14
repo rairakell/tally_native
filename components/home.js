@@ -2,12 +2,14 @@ import React from 'react';
 import { Text, View, Button, TextInput } from 'react-native';
 import styles from './homeCss'
 
-class Home extends React.Component {
+export default class Home extends React.Component {
   constructor(props) {
     super(props)
 
-    if (this.data === undefined) {
-      this.data = {
+    this.state = {};
+
+    if (this.props.data === undefined) {
+      this.state.data = {
         year: {
           in: 0,
           out: 0,
@@ -22,6 +24,8 @@ class Home extends React.Component {
         },
         dayItems: [],
       }
+    } else {
+      this.state.data = this.props.data
     }
   }
 
@@ -30,7 +34,7 @@ class Home extends React.Component {
 	};
 
 	renderDayItems() {
-		return this.props.data.dayItems.map((item) => {
+		return this.state.data.dayItems.map((item) => {
             return (
                 <View style={[styles.yearItems, styles.padding]} key={item.id}>
                 	<View style={styles.dayItem}>
@@ -55,21 +59,21 @@ class Home extends React.Component {
 				</View>
 				<View style={[styles.year, styles.margin]}>
 					<View style={[styles.yearItems, styles.padding]}>
-						<View style={[styles.yearItem]}><Text>年出:{this.props.data.year.out}</Text></View>
-						<View style={[styles.yearItem]}><Text>年入:{this.props.data.year.in}</Text></View>
-						<View style={[styles.yearItem]}><Text>余:{this.props.data.year.in-this.props.data.year.out}</Text></View>
+						<View style={[styles.yearItem]}><Text>年出:{this.state.data.year.out}</Text></View>
+						<View style={[styles.yearItem]}><Text>年入:{this.state.data.year.in}</Text></View>
+						<View style={[styles.yearItem]}><Text>余:{this.state.data.year.in-this.state.data.year.out}</Text></View>
 					</View>
 			        
 			        <View style={[styles.yearItems, styles.padding]}>
-			        	<View style={[styles.yearItem]}><Text>月出:{this.props.data.month.out}</Text></View>
-			        	<View style={[styles.yearItem]}><Text>月入:{this.props.data.month.in}</Text></View>
-						<View style={[styles.yearItem]}><Text>余:{this.props.data.month.in-this.props.data.month.out}</Text></View>
+			        	<View style={[styles.yearItem]}><Text>月出:{this.state.data.month.out}</Text></View>
+			        	<View style={[styles.yearItem]}><Text>月入:{this.state.data.month.in}</Text></View>
+						<View style={[styles.yearItem]}><Text>余:{this.state.data.month.in-this.state.data.month.out}</Text></View>
 			        </View>
 
 			        <View style={[styles.yearItems, styles.padding]}>
-			        	<View style={[styles.yearItem]}><Text>今出:{this.props.data.day.out}</Text></View>
-			        	<View style={[styles.yearItem]}><Text>今入:{this.props.data.day.in}</Text></View>
-						<View style={[styles.yearItem]}><Text>余:{this.props.data.day.in-this.props.data.day.out}</Text></View>
+			        	<View style={[styles.yearItem]}><Text>今出:{this.state.data.day.out}</Text></View>
+			        	<View style={[styles.yearItem]}><Text>今入:{this.state.data.day.in}</Text></View>
+						<View style={[styles.yearItem]}><Text>余:{this.state.data.day.in-this.state.data.day.out}</Text></View>
 			        </View>
 			    </View>
 			    <View style={[styles.dayItemsHeader, styles.margin, styles.padding]}>
