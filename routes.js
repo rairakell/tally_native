@@ -15,7 +15,7 @@ export const HomeStack = StackNavigator({
     screen: TransferScreen,
   },
 }, {
-  initialRouteName: "Transfer",
+  initialRouteName: "Home",
   navigationOptions: {
     headerStyle: {
       backgroundColor: '#f4511e',
@@ -27,30 +27,3 @@ export const HomeStack = StackNavigator({
     },
   },
 });
-
-// export const Tabs = TabNavigator({
-//   Home: {
-//     screen: HomeStack,
-//     navigationOptions: {
-//       tabBarLabel: 'Home',
-//       tabBarIcon: ({ tintColor }) => <Icon name="list" size={35} color={tintColor} />,
-//     },
-//   },
-//   Home2: {
-//     screen: HomeStack,
-//     navigationOptions: {
-//       tabBarLabel: 'Home2',
-//       tabBarIcon: ({ tintColor }) => <Icon name="list" size={35} color={tintColor} />,
-//     },
-//   },
-// });
-
-
-// export const Root = StackNavigator({
-//   Tabs: {
-//     screen: Tabs,
-//   },
-// }, {
-//   mode: 'modal',
-//   headerMode: 'none',
-// });
