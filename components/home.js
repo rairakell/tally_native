@@ -3,38 +3,16 @@ import { Text, View, Button, TextInput } from 'react-native';
 import styles from './homeCss'
 
 export default class Home extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {};
-
-    if (Object.keys(this.props.data).length === 0) {
-      this.state.data = {
-        year: {
-          in: 0,
-          out: 0,
-        },
-        month: {
-          in: 0,
-          out: 0,
-        },
-        day: {
-          in: 0,
-          out: 0,
-        },
-        dayItems: [],
-      }
-    } else {
-      this.state.data = this.props.data
-    }
-  }
-
 	onLogin() {
 		this.props.navigation.navigate('Login');
 	};
 
 	renderDayItems() {
-		return this.state.data.dayItems.map((item) => {
+    if (this.props.data.dayItems === undefined) {
+      return
+    }
+
+		return this.props.data.dayItems.map((item) => {
             return (
                 <View style={[styles.yearItems, styles.padding]} key={item.id}>
                 	<View style={styles.dayItem}>
@@ -59,21 +37,21 @@ export default class Home extends React.Component {
 				</View>
 				<View style={[styles.year, styles.margin]}>
 					<View style={[styles.yearItems, styles.padding]}>
-						<View style={[styles.yearItem]}><Text>年出:{this.state.data.year.out}</Text></View>
-						<View style={[styles.yearItem]}><Text>年入:{this.state.data.year.in}</Text></View>
-						<View style={[styles.yearItem]}><Text>余:{this.state.data.year.in-this.state.data.year.out}</Text></View>
+						<View style={[styles.yearItem]}><Text>年出:{this.props.data.year ? this.props.data.year.out : 0}</Text></View>
+						<View style={[styles.yearItem]}><Text>年入:{this.props.data.year ? this.props.data.year.in : 0}</Text></View>
+						<View style={[styles.yearItem]}><Text>余:{this.props.data.year ? (this.props.data.year.in -this.props.data.year.out) : 0}</Text></View>
 					</View>
 			        
 			        <View style={[styles.yearItems, styles.padding]}>
-			        	<View style={[styles.yearItem]}><Text>月出:{this.state.data.month.out}</Text></View>
-			        	<View style={[styles.yearItem]}><Text>月入:{this.state.data.month.in}</Text></View>
-						<View style={[styles.yearItem]}><Text>余:{this.state.data.month.in-this.state.data.month.out}</Text></View>
+			        	<View style={[styles.yearItem]}><Text>月出:{this.props.data.month ? this.props.data.month.out : 0}</Text></View>
+			        	<View style={[styles.yearItem]}><Text>月入:{this.props.data.month ? this.props.data.month.in : 0}</Text></View>
+						<View style={[styles.yearItem]}><Text>余:{this.props.data.month ? (this.props.data.month.in-this.props.data.month.out) : 0}</Text></View>
 			        </View>
 
 			        <View style={[styles.yearItems, styles.padding]}>
-			        	<View style={[styles.yearItem]}><Text>今出:{this.state.data.day.out}</Text></View>
-			        	<View style={[styles.yearItem]}><Text>今入:{this.state.data.day.in}</Text></View>
-						<View style={[styles.yearItem]}><Text>余:{this.state.data.day.in-this.state.data.day.out}</Text></View>
+			        	<View style={[styles.yearItem]}><Text>今出:{this.props.data.day ? this.props.data.day.out : 0}</Text></View>
+			        	<View style={[styles.yearItem]}><Text>今入:{this.props.data.day ? this.props.data.day.in : 0}</Text></View>
+						<View style={[styles.yearItem]}><Text>余:{this.props.data.day ? (this.props.data.day.in-this.props.data.day.out) : 0}</Text></View>
 			        </View>
 			    </View>
 			    <View style={[styles.dayItemsHeader, styles.margin, styles.padding]}>

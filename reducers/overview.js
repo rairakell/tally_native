@@ -1,3 +1,7 @@
 export default overview = (state={}, action) => {
-	return state;
+	if (action.type == "init") {
+		return action.overview;
+	} else {
+		return state;
+	}
 }

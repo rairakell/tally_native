@@ -7,7 +7,6 @@ import { Home } from '../components'
 class HomeScreen extends React.Component {
 	constructor(props) {
 		super(props);
-		console.log(props)
 		console.log(this.props)
 
 		// if (this.props.FetchOverview !== undefined) {
@@ -19,9 +18,10 @@ class HomeScreen extends React.Component {
 		// 	FetchOverview()
 		// }
 	}
-	// componentWillMount() {
-	// 	this.props.fetchOverview();
-	// }
+
+	componentWillMount() {
+		this.props.fetchOverview();
+	}
 
 	// fetchOverview(dispatch: Function) {
 	// 	dispatch(FetchOverview());
@@ -32,21 +32,19 @@ class HomeScreen extends React.Component {
 	}
 
 	render() {
+		console.log("rendering..................", this.props.data)
 		return (
-			<View>
-				<Home navigation={this.props.navigation} data={this.props.data} />
-				<Button
-					title="click"
-					onPress={this.props.fetchOverview} />
-			</View>
+			<Home navigation={this.props.navigation} data={this.props.data} />
 		)
 	}
 }
 
 const mapStateToProps = (state: Object) => {
-  return {
-    data: state.overview,
-  }
+	console.log("state:", state)
+
+	return {
+		data: state.overview,
+	}
 }
 
 // const mapDispatchToProps = (dispatch: Function) => {
