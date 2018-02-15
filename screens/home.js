@@ -1,21 +1,31 @@
 import React from 'react';
+import {View, Button} from 'react-native';
 import {connect} from 'react-redux';
 import {FetchOverview} from '../actions';
 import { Home } from '../components'
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
 	constructor(props) {
 		super(props);
+		console.log(props)
+		console.log(this.props)
 
-		if (this.props.FetchOverview !== undefined) {
-			this.props.FetchOverview();
-		}
+		// if (this.props.FetchOverview !== undefined) {
+			// this.props.fetchOverview();
+		// }
 		// {FetchOverview} = props;
 
 		// if (FetchOverview !== undefined) {
 		// 	FetchOverview()
 		// }
 	}
+	// componentWillMount() {
+	// 	this.props.fetchOverview();
+	// }
+
+	// fetchOverview(dispatch: Function) {
+	// 	dispatch(FetchOverview());
+	// }
 
 	static navigationOptions = {
 	    title: '记账本',
@@ -23,7 +33,12 @@ export default class HomeScreen extends React.Component {
 
 	render() {
 		return (
-			<Home navigation={this.props.navigation} data={this.props.data} />
+			<View>
+				<Home navigation={this.props.navigation} data={this.props.data} />
+				<Button
+					title="click"
+					onPress={this.props.fetchOverview} />
+			</View>
 		)
 	}
 }
@@ -34,11 +49,17 @@ const mapStateToProps = (state: Object) => {
   }
 }
 
-const mapDispatchToState = (dispatch: Function) => {
-  return {FetchOverview: () => dispatch(FetchOverview())}
+// const mapDispatchToProps = (dispatch: Function) => {
+//   return {
+//   	fetchOverview: () => dispatch(FetchOverview())
+//   };
+// }
+
+const mapDispatchToProps = {
+  	fetchOverview: FetchOverview,
 }
 
-connect(
+export default connect(
 	mapStateToProps,
-	mapDispatchToState,
+	mapDispatchToProps,
 )(HomeScreen);

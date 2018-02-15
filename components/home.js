@@ -8,7 +8,7 @@ export default class Home extends React.Component {
 
     this.state = {};
 
-    if (this.props.data === undefined) {
+    if (Object.keys(this.props.data).length === 0) {
       this.state.data = {
         year: {
           in: 0,

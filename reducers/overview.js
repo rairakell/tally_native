@@ -1,3 +1,3 @@
-export default expenses = (state=[], action) => {
+export default overview = (state={}, action) => {
 	return state;
 }
