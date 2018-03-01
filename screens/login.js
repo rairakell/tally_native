@@ -1,17 +1,23 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {UserToken} from '../actions';
 
 import {
 	Login
 } from '../components'
 
-export default class LoginScreen extends React.Component {
+class LoginScreen extends React.Component {
 	static navigationOptions = {
 	    title: '登录',
 	};
 
 	render() {
 		return (
-			<Login />
+			<Login dispatch={this.props.dispatch} navigation={this.props.navigation} />
 		)
 	}
 }
+
+export default connect(
+	null,
+)(LoginScreen);

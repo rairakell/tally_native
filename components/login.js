@@ -1,17 +1,36 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import {Auth} from '../service';
+import {SetLocalToken} from '../service';
 
 export default class Login extends React.Component {
-	login() {
+	constructor(props) {
+		super(props);
 
+		this.state = {}
+	}
+
+	login() {
+		Auth(this.state.email, this.state.password, (data) => {
+			console.log("........ logined ........");
+			SetLocalToken(data, () => {}, () => {});
+			this.props.dispatch({
+				type: "fetched", 
+				data: data
+			});
+			console.log("Redirect to HomeScreen .......")
+			this.props.navigation.navigate('Home');
+		}, () => {
+			console.log("........ failed .........");
+		})
 	};
 
 	onUserChange(text) {
-
+		this.state.email = text;
 	};
 
 	onPwdChange(text) {
-
+		this.state.password = text;
 	};
 
 	render() {

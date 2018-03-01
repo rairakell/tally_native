@@ -8,11 +8,11 @@ export default class Home extends React.Component {
 	};
 
 	renderDayItems() {
-    if (this.props.data.dayItems === undefined) {
-      return
-    }
+        if (this.props.data.dayItems === undefined) {
+          return
+        }
 
-		return this.props.data.dayItems.map((item) => {
+    	return this.props.data.dayItems.map((item) => {
             return (
                 <View style={[styles.yearItems, styles.padding]} key={item.id}>
                 	<View style={styles.dayItem}>

@@ -1,27 +1,69 @@
 import React from 'react';
 import {View, Button} from 'react-native';
 import {connect} from 'react-redux';
-import {FetchOverview} from '../actions';
-import { Home } from '../components'
+import {FetchOverview, UserToken} from '../actions';
+import {FetchLocalToken} from '../service';
+import { Home } from '../components';
+// import {AuthBaseScreen} from './auth_base';
 
 class HomeScreen extends React.Component {
 	constructor(props) {
 		super(props);
-		console.log(this.props)
 
-		// if (this.props.FetchOverview !== undefined) {
-			// this.props.fetchOverview();
-		// }
-		// {FetchOverview} = props;
+		const user = this.props.user
 
-		// if (FetchOverview !== undefined) {
-		// 	FetchOverview()
+		if (user === undefined || Object.keys(user).length == 0) {
+			FetchLocalToken(
+				(data) => {
+					this.props.dispatch({
+						type: "fetched", 
+						data: data
+					});
+				},
+				() => {
+					console.log('Redirect to login......')
+					this.props.navigation.navigate('Login');
+				}
+			)
+		}
+		// if (user === undefined || Object.keys(user).length == 0) {
+		// 	this.props.navigation.navigate('Login');
 		// }
-	}
+	};
 
 	componentWillMount() {
-		this.props.fetchOverview();
-	}
+		this.props.dispatch({
+			type: "init",
+			overview: {
+				year: {
+					out: 12000,
+					in: 13500,
+				},
+				month: {
+					out: 1200,
+					in: 1350,
+				},
+				day: {
+					out: 568,
+					in: 0,
+				},
+				dayItems: [
+					{
+						id: 1,
+						category: "饮食",
+						amount: 12.5,
+						account: "刘耒的钱包"
+					},
+					{
+						id: 2,
+						category: "服饰",
+						amount: 125,
+						account: "刘耒的钱包"
+					},
+				]
+			}
+		})
+	};
 
 	// fetchOverview(dispatch: Function) {
 	// 	dispatch(FetchOverview());
@@ -29,21 +71,19 @@ class HomeScreen extends React.Component {
 
 	static navigationOptions = {
 	    title: '记账本',
-	}
+	};
 
 	render() {
-		console.log("rendering..................", this.props.data)
 		return (
-			<Home navigation={this.props.navigation} data={this.props.data} />
+			<Home data={this.props.data} />
 		)
-	}
+	};
 }
 
 const mapStateToProps = (state: Object) => {
-	console.log("state:", state)
-
 	return {
 		data: state.overview,
+		user: state.user,
 	}
 }
 
@@ -53,11 +93,18 @@ const mapStateToProps = (state: Object) => {
 //   };
 // }
 
-const mapDispatchToProps = {
-  	fetchOverview: FetchOverview,
-}
+// const mapDispatchToProps = {
+//   	fetchOverview: FetchOverview,
+//   	userToken: () => {
+//   		return {
+//   			onUserToken: (data) => {
+//   				dispatch(data);
+//   			}
+//   		}
+//   	}		
+// }
 
 export default connect(
 	mapStateToProps,
-	mapDispatchToProps,
+	// mapDispatchToProps,
 )(HomeScreen);
