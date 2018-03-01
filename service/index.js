@@ -1,4 +1,4 @@
 import {FetchLocalToken, SetLocalToken} from './local_token';
-import Auth from './auth';
+import {Auth, Overview} from './http';
 
-export {FetchLocalToken, SetLocalToken, Auth};
+export {FetchLocalToken, SetLocalToken, Auth, Overview};

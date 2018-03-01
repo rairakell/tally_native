@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Button} from 'react-native';
 import {connect} from 'react-redux';
 import {FetchOverview, UserToken} from '../actions';
-import {FetchLocalToken} from '../service';
+import {FetchLocalToken, Overview} from '../service';
 import { Home } from '../components';
 // import {AuthBaseScreen} from './auth_base';
 
@@ -32,37 +32,35 @@ class HomeScreen extends React.Component {
 	};
 
 	componentWillMount() {
+		const user = this.props.user;
+
+		console.log("user: ", user)
+
 		this.props.dispatch({
 			type: "init",
 			overview: {
 				year: {
-					out: 12000,
-					in: 13500,
-				},
-				month: {
-					out: 1200,
-					in: 1350,
-				},
-				day: {
-					out: 568,
+					out: 0,
 					in: 0,
 				},
-				dayItems: [
-					{
-						id: 1,
-						category: "饮食",
-						amount: 12.5,
-						account: "刘耒的钱包"
-					},
-					{
-						id: 2,
-						category: "服饰",
-						amount: 125,
-						account: "刘耒的钱包"
-					},
-				]
+				month: {
+					out: 0,
+					in: 0,
+				},
+				day: {
+					out: 0,
+					in: 0,
+				},
+				dayItems: []
 			}
 		})
+
+		Overview(user.email, user.token, (data) => {
+			this.props.dispatch(data)
+		}, () => {
+
+		})
+
 	};
 
 	// fetchOverview(dispatch: Function) {
